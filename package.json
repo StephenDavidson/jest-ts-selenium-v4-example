@@ -4,8 +4,9 @@
   "description": "Example of using selenium typescript and jest",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .js,.ts",
-    "test": "jest"
+    "lint": "eslint --ext .js,.ts .",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "jest",

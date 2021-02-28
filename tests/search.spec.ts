@@ -1,7 +1,6 @@
-import { path } from 'chromedriver'
-import { Builder, WebDriver } from "selenium-webdriver";
-import { Options, ServiceBuilder } from 'selenium-webdriver/chrome';
+import {  WebDriver } from "selenium-webdriver";
 
+import { createDriver } from './driver'
 import SearchPage from './pages/search.page'
 
 describe('search', () => {
@@ -10,14 +9,7 @@ describe('search', () => {
 
   beforeEach(async () => {
     searchPage = new SearchPage();
-    const options: Options = new Options();
-    process.env.HEADLESS === 'true' ? options.addArguments('--no-sandbox', '--headless', '--disable-gpu', '--disable-translate', '--disable-extensions'): null;
-    const serviceBuilder = new ServiceBuilder(process.env.CI === 'true' ? '/usr/bin/chromedriver': path);
-    driver = await new Builder()
-      .forBrowser(process.env.BROWSER)
-      .setChromeService(serviceBuilder)
-      .setChromeOptions(options)
-      .build();
+    driver = await createDriver();
     await driver.get(process.env.URL)
   });
 
